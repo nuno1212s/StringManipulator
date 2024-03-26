@@ -1,5 +1,5 @@
-# string-processor
-A simple string manipulation using an Event Driven Architecture.
+# String-processor
+A simple string manipulation service using an Event Driven Architecture.
 
 ## REST End points
 The service is available at port :8080.
