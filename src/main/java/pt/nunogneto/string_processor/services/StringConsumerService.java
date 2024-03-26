@@ -5,6 +5,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.inject.Singleton;
 import pt.nunogneto.string_processor.events.IEventSubscriber;
 import pt.nunogneto.string_processor.events.integration_events.PublishedStringEvent;
+import pt.nunogneto.string_processor.string_exporter.IStringManipulationExporter;
 
 import java.util.Arrays;
 import java.util.List;

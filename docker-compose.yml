@@ -7,8 +7,8 @@ services:
     volumes:
       - broker:/opt/amq/conf/broker.xml
     environment:
-      AMQ_USER: "admin"
-      AMQ_PASSWORD: "admin"
+      AMQ_USER: &user "admin"
+      AMQ_PASSWORD: &password "admin"
   string_processor:
     build:
       context: .
@@ -20,7 +20,7 @@ services:
       - artemis
     environment:
       QUARKUS_QPID_JMS_URL: "amqp://artemis:5672"
-      QUARKUS_QPID_JMS_USERNAME: "admin"
-      QUARKUS_QPID_JMS_PASSWORD: "admin"
+      QUARKUS_QPID_JMS_USERNAME: *user
+      QUARKUS_QPID_JMS_PASSWORD: *password
 volumes:
   broker:

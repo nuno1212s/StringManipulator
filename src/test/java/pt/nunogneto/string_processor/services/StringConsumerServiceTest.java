@@ -7,9 +7,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import pt.nunogneto.string_processor.events.IEventSubscriber;
 import pt.nunogneto.string_processor.events.integration_events.PublishedStringEvent;
+import pt.nunogneto.string_processor.string_exporter.IStringManipulationExporter;
 
 import java.io.Serializable;
 import java.util.function.Consumer;
