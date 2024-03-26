@@ -3,7 +3,9 @@ package pt.nunogneto.string_processor.services;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.Mock;
 import io.quarkus.test.junit.QuarkusTest;
+import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Alternative;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,17 +36,8 @@ public class StringConsumerServiceTest {
     }
 
     @ApplicationScoped
-    @Mock
-    public static class MockEventSubscriber implements IEventSubscriber {
-
-        @Override
-        public <T extends Serializable> void subscribeEventStream(Consumer<T> eventConsumer, Class<T> tClass) {
-            System.out.println("Subscribed to event stream");
-        }
-    }
-
-    @ApplicationScoped
-    @Mock
+    @Alternative()
+    @Priority(1)
     public static class StringExporter implements IStringManipulationExporter {
         @Override
         public void exportManipulatedString(String toExport) {

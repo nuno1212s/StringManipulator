@@ -1,12 +1,21 @@
 package pt.nunogneto.string_processor.controllers;
 
 import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
+import pt.nunogneto.string_processor.events.IEventPublisher;
+import pt.nunogneto.string_processor.events.IEventSubscriber;
 
 import static io.restassured.RestAssured.given;
 
 @QuarkusTest
 public class StringInputControllerTest {
+
+    @Inject
+    IEventPublisher publisher;
+
+    @Inject
+    IEventSubscriber subscriber;
 
     @Test
     void testStringEndPoint() {
