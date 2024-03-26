@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * A singleton since we don't want to depend
+ * A startup singleton since we don't want to depend
  * On other scopes injecting this dependency. We want this
- * to start as soon as the application starts and subscribe to the events
+ * to start as soon as the application starts and subscribe to the events.
  */
 @Startup
 @Singleton
