@@ -18,5 +18,9 @@ services:
       - "8080:8080"
     depends_on:
       - artemis
+    environment:
+      QUARKUS_QPID_JMS_URL: "amqp://artemis:5672"
+      QUARKUS_QPID_JMS_USERNAME: "admin"
+      QUARKUS_QPID_JMS_PASSWORD: "admin"
 volumes:
   broker:

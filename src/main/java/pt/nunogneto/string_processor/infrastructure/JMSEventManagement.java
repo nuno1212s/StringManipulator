@@ -15,6 +15,11 @@ import pt.nunogneto.string_processor.events.IEventSubscriber;
 import java.io.Serializable;
 import java.util.function.Consumer;
 
+/**
+ * Underlying implementation of the event distribution mechanism.
+ * <p>
+ * Uses JMS to publish and subscribe to events.
+ */
 @ApplicationScoped
 @Named("NonCachedJMS")
 public class JMSEventManagement implements IEventPublisher, IEventSubscriber {
@@ -27,7 +32,7 @@ public class JMSEventManagement implements IEventPublisher, IEventSubscriber {
      * expensive. Instead, we use {@link JMSContext#createContext(int)}
      * to generate a new context ("session") for each event
      * while re-utilizing the underlying connection.
-     *
+     * <p>
      * This context will live for the duration of the application since
      * we have to always be ready to receive events. Sending of events
      * create a short-lived context which gets immediately closed {@link #publishEvent(Serializable)}
@@ -60,7 +65,8 @@ public class JMSEventManagement implements IEventPublisher, IEventSubscriber {
 
     @Override
     public <T extends Serializable> void publishEvent(T event) {
-        //
+        // Initialize a small lived context to send the event,
+        // As we don't want to partake in synchronization with the consumers
         try (JMSContext context = this.context.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
             ObjectMessage eventObject = context.createObjectMessage(event);
 
@@ -70,6 +76,10 @@ public class JMSEventManagement implements IEventPublisher, IEventSubscriber {
 
     @Override
     public <T extends Serializable> void subscribeEventStream(Consumer<T> eventConsumer, Class<T> tClass) {
+
+        // Supporting extra features such as message selectors is easily done with
+        // Proxy patterns or even just a simple if else block here, comparing the class
+        // Types
 
         this.context.createConsumer(this.context.createQueue("string-processor")).setMessageListener(message -> {
             try {
