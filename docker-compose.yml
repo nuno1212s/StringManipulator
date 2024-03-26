@@ -1,0 +1,22 @@
+services:
+  artemis:
+    image: quay.io/artemiscloud/activemq-artemis-broker
+    ports:
+      - "5672:5672"
+      - "61616:61616"
+    volumes:
+      - broker:/opt/amq/conf/broker.xml
+    environment:
+      AMQ_USER: "admin"
+      AMQ_PASSWORD: "admin"
+  string_processor:
+    build:
+      context: .
+      dockerfile: src/main/docker/Dockerfile.jvm
+    image: nneto/string-processor
+    ports:
+      - "8080:8080"
+    depends_on:
+      - artemis
+volumes:
+  broker:
