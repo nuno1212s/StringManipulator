@@ -7,6 +7,6 @@ import pt.nunogneto.string_processor.events.integration_events.PublishedStringEv
  */
 public interface IStringConsumerService {
 
-    String processString(PublishedStringEvent event);
+    String processString(String receivedString);
 
 }

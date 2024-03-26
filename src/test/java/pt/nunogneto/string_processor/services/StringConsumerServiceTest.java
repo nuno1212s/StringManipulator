@@ -28,9 +28,9 @@ public class StringConsumerServiceTest {
 
     @Test
     public void testStringProcessing() {
-        PublishedStringEvent event = new PublishedStringEvent("com.SQILLS.assignment an.oth8er  Sample.1nput-Str");
+        String toManipulate = "com.SQILLS.assignment an.oth8er  Sample.1nput-Str";
 
-        Assertions.assertEquals("com.SQILLS.assignment an.oth8er Sample.1nput-Str com_SQILLS_assignment an_oth8er Sample_1nput_Str COM_SQILLS_ASSIGNMENT AN_OTH8ER SAMPLE_1NPUT_STR", stringConsumerService.processString(event));
+        Assertions.assertEquals("com.SQILLS.assignment an.oth8er Sample.1nput-Str com_SQILLS_assignment an_oth8er Sample_1nput_Str COM_SQILLS_ASSIGNMENT AN_OTH8ER SAMPLE_1NPUT_STR", stringConsumerService.processString(toManipulate));
     }
 
     @ApplicationScoped

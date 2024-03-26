@@ -48,13 +48,12 @@ public class StringConsumerService implements IStringConsumerService {
     }
 
     private void handleReceivedEvent(PublishedStringEvent event) {
-
-        stringExporter.exportManipulatedString(processString(event));
+        stringExporter.exportManipulatedString(processString(event.inputStr()));
     }
 
     @Override
-    public String processString(PublishedStringEvent event) {
-        String[] splitString = splitReceivedString(event.inputStr());
+    public String processString(String inputStr) {
+        String[] splitString = splitReceivedString(inputStr);
 
         List<String> cleanAlphaNumeric = sanitizeAlphaNumeric(splitString);
 
